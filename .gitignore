@@ -1,0 +1,12 @@
+
+# environment files
+venv/*
+venv
+
+# Windows PyCharm files
+.gitignore
+ageOfWarSim.iml
+misc.xml
+modules.xml
+profiles_settings.xml
+vcs.xml

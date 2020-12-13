@@ -42,10 +42,10 @@ def calc_battlecard_permutations(battlelines, n):
 
 
 # get a random dice roll given a number of dice
-def battleline_roll(dice):
+def battleline_roll(num_dice):
     roll = []
-    for i in range(0, dice):
-        roll.append(random.randint(1, 6))
+    for i in range(0, num_dice):
+        roll.append(random.randint(0, 5))
     return roll;
 
 

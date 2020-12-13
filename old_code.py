@@ -3,12 +3,12 @@ import itertools
 import json
 from collections import Counter
 
-# 1 = Head
-# 2 = Bow
-# 3 = Horse
-# 4 = 1 Sword
-# 5 = 2 Sword
-# 6 = 3 Sword
+# 0 = Head
+# 1 = Bow
+# 2 = Horse
+# 3 = 1 Sword
+# 4 = 2 Sword
+# 5 = 3 Sword
 battlecards = {"Name": "test", "Battlelines": [1, 2, 3]}
 # battlecards = {"Name" : "test", "Battlelines" : [1,2,3, [1, 2]]}
 # print(battlecards.get("Battlelines"))

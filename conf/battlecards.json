@@ -1,24 +1,98 @@
-
-
-
-
-
-my_card1 = BattleCard()
-my_card1.name = "kumamoto"
-my_card1.score = 3.0
-my_card1.stealable = False
-my_card1.battle_set = my_battle_sets["shimatzu"]
-my_card1.battle_lines.append([0, 0])
-my_card1.battle_lines.append([1])
-my_card1.battle_lines.append([2])
-my_card1.battle_lines.append(["s4"])
-my_battle_game.field.append(my_card1)
-my_battle_sets["shimatsu"].cards.append(my_card1)
-
 {
   "name" : "kumamoto",
-  "score" : "0.0",
+  "score" : "3.0",
   "stealable" : False,
-  "battle_lines" : [[0,0],[1],[2]],
+  "battle_lines" : [[0,0],[1],[2],["s4"]],
   "battle_set" : "shimatsu"
+},
+{
+  "name" : "marugame",
+  "score" : "1.0",
+  "stealable" : True,
+  "battle_lines" : [[0,0],[2]],
+  "battle_set" : "chosokabe"
+},
+{
+  "name" : "matsuyama",
+  "score" : "2.0",
+  "stealable" : True,
+  "battle_lines" : [[0],["s4"],["s4"]],
+  "battle_set" : "chosokabe"
+},
+{
+  "name" : "odani",
+  "score" : "1.0",
+  "stealable" : True,
+  "battle_lines" : [["s10"]],
+  "battle_set" : "oda"
+},
+{
+  "name" : "azuchi",
+  "score" : "3.0",
+  "stealable" : True,
+  "battle_lines" : [[1],[2,2],["s5"]],
+  "battle_set" : "oda"
+},
+{
+  "name" : "matsumoto",
+  "score" : "2.0",
+  "stealable" : True,
+  "battle_lines" : [[1],[1],["s7"]],
+  "battle_set" : "oda"
+},
+{
+  "name" : "gifu",
+  "score" : "1.0",
+  "stealable" : True,
+  "battle_lines" : [[0],[1],[2]],
+  "battle_set" : "oda"
+},
+{
+  "name" : "gassantoda",
+  "score" : "2.0",
+  "stealable" : True,
+  "battle_lines" : [[0],["s8"]],
+  "battle_set" : "mori"
+},
+{
+  "name" : "takahashi",
+  "score" : "2.0",
+  "stealable" : True,
+  "battle_lines" : [[2,2],["s5"],["s2"]],
+  "battle_set" : "mori"
+},
+{
+  "name" : "kitanosho",
+  "score" : "3.0",
+  "stealable" : True,
+  "battle_lines" : [[0],[1,2],["s6"]],
+  "battle_set" : "uesugi"
+},
+{
+  "name" : "kasugayama",
+  "score" : "4.0",
+  "stealable" : True,
+  "battle_lines" : [[1,1],[2,2]],
+  "battle_set" : "uesugi"
+},
+{
+  "name" : "edo",
+  "score" : "3.0",
+  "stealable" : True,
+  "battle_lines" : [[1,2],[1,2],["s3"]],
+  "battle_set" : "tokugawa"
+},
+{
+  "name" : "kiyosu",
+  "score" : "2.0",
+  "stealable" : True,
+  "battle_lines" : [[0],[1],[2],["s3"]],
+  "battle_set" : "tokugawa"
+},
+{
+  "name" : "inuyama",
+  "score" : "1.0",
+  "stealable" : True,
+  "battle_lines" : [[0],[1,2]],
+  "battle_set" : "tokugawa"
 }

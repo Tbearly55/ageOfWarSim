@@ -1,5 +1,5 @@
 import random
-
+import copy
 
 class BattleSet:
     def __init__(self):
@@ -147,9 +147,11 @@ def get_available_battle_lines(game, player):
     for card in game.field:
         for bl in card.battle_lines:
             available_battle_lines.append({"name": card.name,
+                                           "card": card,
                                            "bl": bl,
                                            "score": card.score,
-                                           "bs_bonus": card.battle_set.bonus})
+                                           "bs_bonus": card.battle_set.bonus,
+                                           "orgin": "field"})
     for pl in game.players:
         if player == pl:
             continue  # Not yourself
@@ -157,30 +159,159 @@ def get_available_battle_lines(game, player):
             if card.stealable:
                 for bl in card.battle_lines:
                     available_battle_lines.append({"name": card.name,
+                                                   "card": card,
                                                    "bl": bl,
                                                    "score": card.score,
-                                                   "bs_bonus": card.battle_set.bonus})
+                                                   "bs_bonus": card.battle_set.bonus,
+                                                   "orgin": pl})
+                # Adding additional battle line because we are stealing from a player
+                available_battle_lines.append({"name": card.name,
+                                               "card": card,
+                                               "bl": [0],
+                                               "score": card.score,
+                                               "bs_bonus": card.battle_set.bonus,
+                                               "orgin": pl})
     print("Available Battle Lines:")
     for i in available_battle_lines:
         print(i)
 
     return available_battle_lines
 
-def play_game(game):
 
-    # get a random dice roll given a number of dice
-    def battleline_roll(num_dice):
-        roll = []
-        for i in range(0, num_dice):
-            roll.append(random.randint(0, 5))
-        return roll;
+def is_viable_bl_swords(players_roll, bl_object):
+    # Is swordline
+    bl_swords = int(bl_object[0][1:])
+    player_swords = 0
+    for i in players_roll:
+        if i == 3:
+            player_swords += 1
+        if i == 4:
+            player_swords += 2
+        if i == 5:
+            player_swords += 3
+
+    return player_swords >= bl_swords
+
+
+def is_viable_bl_hash(players_roll, bl_object):
+    bl_hash = {}
+    players_hash = {}
+    for i in bl_object:
+        if i not in bl_hash:
+            bl_hash[i] = 0
+        bl_hash[i] += 1
+    for i in players_roll:
+        if i not in players_hash:
+            players_hash[i] = 0
+        players_hash[i] += 1
+
+    win_count = 0
+    for i in bl_hash:
+        if i in players_hash and i in bl_hash:
+            if players_hash[i] >= bl_hash[i]:
+                win_count += 1
+
+    return win_count >= len(bl_hash)
+
+
+def is_sword_bl(bl_object):
+    return str(bl_object[0])[0] == "s"
+
+def is_viable_bl(players_roll, bl_object):
+    if is_sword_bl(bl_object):
+        return is_viable_bl_swords(players_roll, bl_object)
+    else:
+        return is_viable_bl_hash(players_roll, bl_object)
+
+
+def get_viable_battle_lines(players_roll, available_battle_lines):
+    print(players_roll)
+    print(available_battle_lines)
+
+    viable_battle_lines = []
+
+    for bl in available_battle_lines:
+        bl_object = bl["bl"]
+        if is_viable_bl(players_roll, bl_object):
+            viable_battle_lines.append(bl)
+
+    return viable_battle_lines
+
+def select_battle_line(players_roll, viable_battles_lines, strategy=None):
+    # Strategy adds more complexity to selecting a battle line
+    return viable_battles_lines[0]
+
+
+def update_players_dice(player_roll, selected_battle_line):
+    print("player_roll: ", player_roll)
+    print("selected_battle_line: ", selected_battle_line)
+    if is_sword_bl(selected_battle_line):
+        bl_swords = int(selected_battle_line[0][1:])
+        player_roll.sort(reverse=True)
+        i = 0
+        while bl_swords > 0:
+            if player_roll[i] == 3:
+                bl_swords -= 1
+            if player_roll[i] == 4:
+                bl_swords -= 2
+            if player_roll[i] == 5:
+                bl_swords -= 3
+            i += 1
+        return len(player_roll) - i
+    else:
+        return len(player_roll)-len(selected_battle_line)
+
+
+def finish_card(players_roll, selected_battle_line):
+    players_dice = len(players_roll)
+
+    # Remove selected battle line
+    card_battle_lines = copy.deepcopy(selected_battle_line["card"].battle_lines)  # Do this so we don't damage our original card
+    card_battle_lines.remove(selected_battle_line["bl"])
+    if len(card_battle_lines) == 0:
+        return True
+    players_dice = update_players_dice(players_roll, selected_battle_line["bl"])
+
+    while players_dice > 0:
+        players_roll = battleline_roll(players_dice)
+        card_battle_lines_bl = []
+        for x in card_battle_lines:
+            card_battle_lines_bl.append({"bl": x})
+        viable_battles_lines = get_viable_battle_lines(players_roll, card_battle_lines_bl)
+        if len(viable_battles_lines) == 0:
+            players_dice -= 1
+            continue
+
+        selected_battle_line = select_battle_line(players_roll, viable_battles_lines)
+
+        # Remove selected battle line
+        card_battle_lines.remove(selected_battle_line["bl"])
+        if len(card_battle_lines) == 0:
+            return True
+        players_dice = update_players_dice(players_roll, selected_battle_line["bl"])
+
+    return False
+
+
+# get a random dice roll given a number of dice
+def battleline_roll(num_dice):
+    roll = []
+    for i in range(0, num_dice):
+        roll.append(random.randint(0, 5))
+    return roll;
+
+
+def play_game(game):
 
     GAME_DICE = 7
 
     print_field(game)
 
+    turns = 0
+
     while len(game.field) > 0:
         for player in game.players:
+            turns += 1
             print("Its % s turn!" % player)
             players_dice = GAME_DICE
 
@@ -191,15 +322,26 @@ def play_game(game):
 
             # See which battle the player can choose from
             available_battle_lines = get_available_battle_lines(game, player)
+            viable_battles_lines = get_viable_battle_lines(players_roll, available_battle_lines)
+            selected_battle_line = select_battle_line(players_roll, viable_battles_lines)
 
+            # End first dice roll (maybe functionalize later)
 
+            if finish_card(players_roll, selected_battle_line):
+                # Got card remove from field
+                if selected_battle_line["orgin"] == "field":
+                    game.field.remove(selected_battle_line['card'])
+                else:
+                    selected_battle_line['origin'].inventory.remove(selected_battle_line['card'])
+                player.inventory.append(selected_battle_line['card'])
+            else:
+                continue
 
-
-            # TODO pick a viable battle line (this chooses a card for you)
+            print("selected_battle_line:", selected_battle_line)
             # TODO finish card run
-
+            # If
             # TODO Need to be able to move a given card into an inventory (AXIOM OF CHOICE)
-            player.inventory.append(game.field.pop())
+
             # TODO Have to update if battle set made update cards to be not stealable
             print("Its % s inventory:" % player)
             for i in player.inventory:
@@ -216,6 +358,12 @@ def play_game(game):
     
     # TODO Calculate scores at end
     print("Game over!")
+    for p in game.players:
+        print("Its % s inventory:" % p)
+        for i in p.inventory:
+            print(i)
+
+    print(turns)
 
 
 def run_age_of_war(name):

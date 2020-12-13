@@ -1,28 +1,24 @@
-{
+[{
     "name" : "shimazu",
     "bonus": 0.0
 },
 {
-    "name" : "shimazu",
-    "bonus": 0.0
+    "name" : "uesugi ",
+    "bonus": 1.0
 },
 {
-    "name" : "shimazu",
-    "bonus": 0.0
+    "name" : "tokugawa",
+    "bonus": 2.0
 },
 {
-    "name" : "shimazu",
-    "bonus": 0.0
+    "name" : "oda",
+    "bonus": 3.0
 },
 {
-    "name" : "shimazu",
-    "bonus": 0.0
+    "name" : "chosokabe",
+    "bonus": 1.0
 },
 {
-    "name" : "shimazu",
-    "bonus": 0.0
-},
-{
-    "name" : "shimazu",
-    "bonus": 0.0
-}
+    "name" : "mori",
+    "bonus": 1.0
+}]

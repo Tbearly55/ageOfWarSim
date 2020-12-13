@@ -67,6 +67,11 @@ class BattleGame:
     #  , [s4]
     #  ]
 
+def create_card_objects():
+    exit()
+
+def create_battle_set_objects():
+    exit()
 
 def create_game():
     my_battle_game = BattleGame()

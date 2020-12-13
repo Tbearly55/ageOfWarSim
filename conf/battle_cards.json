@@ -1,4 +1,4 @@
-{
+[{
   "name" : "kumamoto",
   "score" : "3.0",
   "stealable" : False,
@@ -95,4 +95,4 @@
   "stealable" : True,
   "battle_lines" : [[0],[1,2]],
   "battle_set" : "tokugawa"
-}
+}]

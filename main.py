@@ -73,10 +73,10 @@ def create_game():
 
     # Construct all BattleSet objects
     my_battle_sets = {}
-    shimatsu_battle_set = BattleSet()
-    shimatsu_battle_set.name = "shimatsu"
-    shimatsu_battle_set.bonus = 0.0
-    my_battle_sets["shimatsu"] = shimatsu_battle_set
+    shimazu_battle_set = BattleSet()
+    shimazu_battle_set.name = "shimazu"
+    shimazu_battle_set.bonus = 0.0
+    my_battle_sets["shimazu"] = shimazu_battle_set
 
     chosokabe_battle_set = BattleSet()
     chosokabe_battle_set.name = "Chosokabe"
@@ -88,13 +88,13 @@ def create_game():
     my_card1.name = "kumamoto"
     my_card1.score = 3.0
     my_card1.stealable = False
-    my_card1.battle_set = my_battle_sets["shimatsu"]
+    my_card1.battle_set = my_battle_sets["shimazu"]
     my_card1.battle_lines.append([0, 0])
     my_card1.battle_lines.append([1])
     my_card1.battle_lines.append([2])
     my_card1.battle_lines.append(["s4"])
     my_battle_game.field.append(my_card1)
-    my_battle_sets["shimatsu"].cards.append(my_card1)
+    my_battle_sets["shimazu"].cards.append(my_card1)
 
     my_card2 = BattleCard()
     my_card2.name = "muragame"

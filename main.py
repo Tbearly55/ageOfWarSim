@@ -2,6 +2,7 @@ import random
 import copy
 import json
 
+
 class BattleSet:
     def __init__(self):
         self.name = "Any Battle Set"
@@ -68,24 +69,40 @@ class BattleGame:
     #  , [s4]
     #  ]
 
+
 def create_battle_set_objects(my_battle_sets, battle_sets_json, battle_set_filter=False):
-    #battle_set_filter = True then only load battle sets with include_in_game = true. if battle_set_filter = False then load all battlesets in
+    # battle_set_filter = True then only load battle sets with include_in_game = true. if battle_set_filter = False then load all battlesets in
 
     for bs in battle_sets_json:
         if battle_set_filter and bs["include_in_game"] is False:
             continue
         else:
-            battle_set = BattleSet
+            battle_set = BattleSet()
             battle_set.name = bs["name"]
             battle_set.bonus = bs["bonus"]
             my_battle_sets[bs["name"]] = battle_set
 
     return my_battle_sets
 
-def create_battle_card_objects(my_battle_game_field, my_battle_sets, battle_cards_json):
 
+def create_battle_card_objects(my_battle_game_field, my_battle_sets, battle_cards_json):
+    for bc in battle_cards_json:
+        if bc["include_in_game"] is False:
+            continue
+
+        battle_card = BattleCard()
+        battle_card.name = bc["name"]
+        battle_card.score = bc["score"]
+        battle_card.stealable = bc["stealable"]
+        battle_card.battle_set = my_battle_sets[bc["battle_set"]]
+        for bl in bc["battle_lines"]:
+            battle_card.battle_lines.append(bl)
+
+        my_battle_game_field.append(battle_card)
+        my_battle_sets[bc["battle_set"]].cards.append(battle_card)
 
     return my_battle_game_field, my_battle_sets
+
 
 def create_game():
     my_battle_game = BattleGame()
@@ -144,7 +161,7 @@ def create_game():
     with open("conf/battle_cards.json") as f:
         battle_cards_json = json.load(f)
 
-    my_battle_game.field, my_battle_sets = create_battle_card_objects(my_battle_game, my_battle_sets, battle_cards_json)
+    my_battle_game.field, my_battle_sets = create_battle_card_objects(my_battle_game.field, my_battle_sets, battle_cards_json)
 
     print(my_battle_game.field)
     for i in my_battle_game.field:
@@ -162,6 +179,7 @@ def create_game():
     my_battle_game.players.append(player2)
 
     return my_battle_game
+
 
 def print_field(game):
     print("Current Field:")
@@ -246,6 +264,7 @@ def is_viable_bl_hash(players_roll, bl_object):
 def is_sword_bl(bl_object):
     return str(bl_object[0])[0] == "s"
 
+
 def is_viable_bl(players_roll, bl_object):
     if is_sword_bl(bl_object):
         return is_viable_bl_swords(players_roll, bl_object)
@@ -265,6 +284,7 @@ def get_viable_battle_lines(players_roll, available_battle_lines):
             viable_battle_lines.append(bl)
 
     return viable_battle_lines
+
 
 def select_battle_line(players_roll, viable_battles_lines, strategy=None):
     # Strategy adds more complexity to selecting a battle line
@@ -327,7 +347,7 @@ def battleline_roll(num_dice):
     roll = []
     for i in range(0, num_dice):
         roll.append(random.randint(0, 5))
-    return roll;
+    return roll
 
 
 def play_game(game):
@@ -400,7 +420,6 @@ def run_age_of_war(name):
     print(f'Welcome to Age of War')  # Press Ctrl+F8 to toggle the breakpoint.
 
     # Load all game objects, cards, players, fields, etc.
-
 
     # Create the game
     my_game = create_game()

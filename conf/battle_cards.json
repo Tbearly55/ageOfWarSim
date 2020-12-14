@@ -60,7 +60,7 @@
   "stealable" : true,
   "battle_lines" : [[0],["s8"]],
   "battle_set" : "mori",
-  "include_in_game" : false
+  "include_in_game" : true
 },
 {
   "name" : "takahashi",
@@ -68,7 +68,7 @@
   "stealable" : true,
   "battle_lines" : [[2,2],["s5"],["s2"]],
   "battle_set" : "mori",
-  "include_in_game" : false
+  "include_in_game" : true
 },
 {
   "name" : "kitanosho",

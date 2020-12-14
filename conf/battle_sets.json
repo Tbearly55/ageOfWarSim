@@ -1,24 +1,30 @@
 [{
     "name" : "shimazu",
-    "bonus": 0.0
+    "bonus": 0.0,
+    "include_in_game" : false
 },
 {
     "name" : "uesugi ",
-    "bonus": 1.0
+    "bonus": 1.0,
+    "include_in_game" : false
 },
 {
     "name" : "tokugawa",
-    "bonus": 2.0
+    "bonus": 2.0,
+    "include_in_game" : false
 },
 {
     "name" : "oda",
-    "bonus": 3.0
+    "bonus": 3.0,
+    "include_in_game" : false
 },
 {
     "name" : "chosokabe",
-    "bonus": 1.0
+    "bonus": 1.0,
+    "include_in_game" : false
 },
 {
     "name" : "mori",
-    "bonus": 1.0
+    "bonus": 1.0,
+    "include_in_game" : true
 }]

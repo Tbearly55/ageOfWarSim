@@ -1,5 +1,6 @@
 import random
 import copy
+import json
 
 class BattleSet:
     def __init__(self):
@@ -67,11 +68,24 @@ class BattleGame:
     #  , [s4]
     #  ]
 
-def create_card_objects():
-    exit()
+def create_battle_set_objects(my_battle_sets, battle_sets_json, battle_set_filter=False):
+    #battle_set_filter = True then only load battle sets with include_in_game = true. if battle_set_filter = False then load all battlesets in
 
-def create_battle_set_objects():
-    exit()
+    for bs in battle_sets_json:
+        if battle_set_filter and bs["include_in_game"] is False:
+            continue
+        else:
+            battle_set = BattleSet
+            battle_set.name = bs["name"]
+            battle_set.bonus = bs["bonus"]
+            my_battle_sets[bs["name"]] = battle_set
+
+    return my_battle_sets
+
+def create_battle_card_objects(my_battle_game_field, my_battle_sets, battle_cards_json):
+
+
+    return my_battle_game_field, my_battle_sets
 
 def create_game():
     my_battle_game = BattleGame()
@@ -87,6 +101,11 @@ def create_game():
     chosokabe_battle_set.name = "Chosokabe"
     chosokabe_battle_set.bonus = 1.0
     my_battle_sets["chosokabe"] = chosokabe_battle_set
+
+    with open("conf/battle_sets.json") as f:
+        battle_sets_json = json.load(f)
+
+    my_battle_sets = create_battle_set_objects(my_battle_sets, battle_sets_json, True)
 
     # Create all the card objects
     my_card1 = BattleCard()
@@ -121,6 +140,11 @@ def create_game():
     my_card3.battle_lines.append(["s4"])
     my_battle_game.field.append(my_card3)
     my_battle_sets["chosokabe"].cards.append(my_card3)
+
+    with open("conf/battle_cards.json") as f:
+        battle_cards_json = json.load(f)
+
+    my_battle_game.field, my_battle_sets = create_battle_card_objects(my_battle_game, my_battle_sets, battle_cards_json)
 
     print(my_battle_game.field)
     for i in my_battle_game.field:

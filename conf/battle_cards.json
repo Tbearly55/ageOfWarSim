@@ -1,98 +1,112 @@
 [{
   "name" : "kumamoto",
   "score" : "3.0",
-  "stealable" : False,
+  "stealable" : false,
   "battle_lines" : [[0,0],[1],[2],["s4"]],
-  "battle_set" : "shimazu"
+  "battle_set" : "shimazu",
+  "include_in_game" : false
 },
 {
   "name" : "marugame",
   "score" : "1.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[0,0],[2]],
-  "battle_set" : "chosokabe"
+  "battle_set" : "chosokabe",
+  "include_in_game" : false
 },
 {
   "name" : "matsuyama",
   "score" : "2.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[0],["s4"],["s4"]],
-  "battle_set" : "chosokabe"
+  "battle_set" : "chosokabe",
+  "include_in_game" : false
 },
 {
   "name" : "odani",
   "score" : "1.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [["s10"]],
-  "battle_set" : "oda"
+  "battle_set" : "oda",
+  "include_in_game" : false
 },
 {
   "name" : "azuchi",
   "score" : "3.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[1],[2,2],["s5"]],
-  "battle_set" : "oda"
+  "battle_set" : "oda",
+  "include_in_game" : false
 },
 {
   "name" : "matsumoto",
   "score" : "2.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[1],[1],["s7"]],
-  "battle_set" : "oda"
+  "battle_set" : "oda",
+  "include_in_game" : false
 },
 {
   "name" : "gifu",
   "score" : "1.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[0],[1],[2]],
-  "battle_set" : "oda"
+  "battle_set" : "oda",
+  "include_in_game" : false
 },
 {
   "name" : "gassantoda",
   "score" : "2.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[0],["s8"]],
-  "battle_set" : "mori"
+  "battle_set" : "mori",
+  "include_in_game" : false
 },
 {
   "name" : "takahashi",
   "score" : "2.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[2,2],["s5"],["s2"]],
-  "battle_set" : "mori"
+  "battle_set" : "mori",
+  "include_in_game" : false
 },
 {
   "name" : "kitanosho",
   "score" : "3.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[0],[1,2],["s6"]],
-  "battle_set" : "uesugi"
+  "battle_set" : "uesugi",
+  "include_in_game" : false
 },
 {
   "name" : "kasugayama",
   "score" : "4.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[1,1],[2,2]],
-  "battle_set" : "uesugi"
+  "battle_set" : "uesugi",
+  "include_in_game" : false
 },
 {
   "name" : "edo",
   "score" : "3.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[1,2],[1,2],["s3"]],
-  "battle_set" : "tokugawa"
+  "battle_set" : "tokugawa",
+  "include_in_game" : false
 },
 {
   "name" : "kiyosu",
   "score" : "2.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[0],[1],[2],["s3"]],
-  "battle_set" : "tokugawa"
+  "battle_set" : "tokugawa",
+  "include_in_game" : false
 },
 {
   "name" : "inuyama",
   "score" : "1.0",
-  "stealable" : True,
+  "stealable" : true,
   "battle_lines" : [[0],[1,2]],
-  "battle_set" : "tokugawa"
+  "battle_set" : "tokugawa",
+  "include_in_game" : false
 }]
